@@ -26,6 +26,8 @@ model User {
   role      Role     @default(USER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  bookings  Booking[]
 }
 
 model Movie {
@@ -51,4 +53,23 @@ model Showtime {
   availableSeats Int
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
+
+  bookings       Booking[]
+}
+
+enum BookingStatus {
+  CONFIRMED
+  CANCELLED
+}
+
+model Booking {
+  id          String        @id @default(uuid())
+  userId      String
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  showtimeId  String
+  showtime    Showtime      @relation(fields: [showtimeId], references: [id], onDelete: Cascade)
+  seatsBooked Int
+  status      BookingStatus @default(CONFIRMED)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 }

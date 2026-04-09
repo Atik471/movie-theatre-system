@@ -3,11 +3,9 @@ const cors = require('cors');
 
 const app = express();
 
-// Middleware
 app.use(cors());
-app.use(express.json()); // Parse JSON bodies
+app.use(express.json());
 
-// Default Route
 app.get('/', (req, res) => {
   res.json({ message: 'Movie Theater Booking API is running.' });
 });
