@@ -428,7 +428,7 @@
   "variable": [
     {
       "key": "baseUrl",
-      "value": "http://localhost:3000"
+      "value": "https://movie-theatre-system-production.up.railway.app"
     },
     {
       "key": "adminToken",
