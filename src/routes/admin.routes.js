@@ -1,7 +1,8 @@
 const express = require('express');
 const {
   addMovie, updateMovie, deleteMovie,
-  addShowtime, updateShowtime, deleteShowtime
+  addShowtime, updateShowtime, deleteShowtime,
+  getAllBookings
 } = require('../controllers/admin.controller');
 const { authenticate, authorizeAdmin } = require('../middleware/auth.middleware');
 
@@ -19,5 +20,8 @@ router.delete('/movies/:id', deleteMovie);
 router.post('/showtimes', addShowtime);
 router.put('/showtimes/:id', updateShowtime);
 router.delete('/showtimes/:id', deleteShowtime);
+
+// Booking endpoints
+router.get('/bookings', getAllBookings);
 
 module.exports = router;

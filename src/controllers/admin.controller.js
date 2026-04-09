@@ -113,6 +113,22 @@ const deleteShowtime = async (req, res) => {
   }
 };
 
+// --- BOOKINGS ---
+const getAllBookings = async (req, res) => {
+  try {
+    const bookings = await prisma.booking.findMany({
+      include: {
+        user: { select: { id: true, name: true, email: true } },
+        showtime: { include: { movie: { select: { title: true } } } },
+      },
+    });
+    res.status(200).json({ bookings });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+};
+
 module.exports = {
   addMovie,
   updateMovie,
@@ -120,4 +136,5 @@ module.exports = {
   addShowtime,
   updateShowtime,
   deleteShowtime,
+  getAllBookings,
 };
