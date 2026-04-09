@@ -1,5 +1,8 @@
 const express = require('express');
-const { addMovie, updateMovie, deleteMovie } = require('../controllers/admin.controller');
+const {
+  addMovie, updateMovie, deleteMovie,
+  addShowtime, updateShowtime, deleteShowtime
+} = require('../controllers/admin.controller');
 const { authenticate, authorizeAdmin } = require('../middleware/auth.middleware');
 
 const router = express.Router();
@@ -11,5 +14,10 @@ router.use(authenticate, authorizeAdmin);
 router.post('/movies', addMovie);
 router.put('/movies/:id', updateMovie);
 router.delete('/movies/:id', deleteMovie);
+
+// Showtime endpoints
+router.post('/showtimes', addShowtime);
+router.put('/showtimes/:id', updateShowtime);
+router.delete('/showtimes/:id', deleteShowtime);
 
 module.exports = router;
