@@ -74,8 +74,32 @@ const bookTickets = async (req, res) => {
   }
 };
 
+const getUserBookings = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const bookings = await prisma.booking.findMany({
+      where: { userId },
+      include: {
+        showtime: {
+          include: {
+            movie: {
+              select: { title: true }
+            }
+          }
+        }
+      },
+      orderBy: { createdAt: 'desc' }
+    });
+    res.status(200).json({ bookings });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+};
+
 module.exports = {
   getAllMovies,
   getMovieShowtimes,
   bookTickets,
+  getUserBookings,
 };
