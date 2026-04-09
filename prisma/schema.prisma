@@ -37,4 +37,18 @@ model Movie {
   isActive    Boolean    @default(true)
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
+
+  showtimes   Showtime[]
+}
+
+model Showtime {
+  id             String    @id @default(uuid())
+  movieId        String
+  movie          Movie     @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  startTime      DateTime
+  endTime        DateTime
+  totalSeats     Int
+  availableSeats Int
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 }
