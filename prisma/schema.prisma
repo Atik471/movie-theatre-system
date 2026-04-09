@@ -27,3 +27,14 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Movie {
+  id          String     @id @default(uuid())
+  title       String
+  description String?
+  duration    Int
+  releaseDate DateTime
+  isActive    Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
